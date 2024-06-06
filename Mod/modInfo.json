@@ -1,0 +1,9 @@
+{
+  "identifier": "erkle64.WaterPlacer",
+  "displayName": "WaterPlacer",
+  "assetBundles": [ ],
+  "assemblies": [
+    "WaterPlacer.dll"
+  ]
+}
+

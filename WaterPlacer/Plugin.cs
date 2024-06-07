@@ -1,6 +1,8 @@
 using C3.ModKit;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Unfoundry;
 using UnityEngine;
 
@@ -13,7 +15,7 @@ namespace WaterPlacer
             MODNAME = "WaterPlacer",
             AUTHOR = "erkle64",
             GUID = AUTHOR + "." + MODNAME,
-            VERSION = "0.1.0";
+            VERSION = "0.2.0";
 
         public static LogSource log;
 
@@ -60,7 +62,8 @@ namespace WaterPlacer
         {
             log.Log($"Loading {MODNAME}");
 
-            _waterPlacerCHM = new WaterPlacerCHM();
+            var assets = typeof(Mod).GetField("assets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(mod) as Dictionary<string, UnityEngine.Object>;
+            _waterPlacerCHM = new WaterPlacerCHM(assets);
             _waterPlacerModeIndex = CustomHandheldModeManager.RegisterMode(_waterPlacerCHM);
 
             CommonEvents.OnUpdate += Update;
